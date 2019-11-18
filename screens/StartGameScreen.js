@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import Card from '../components/common/Card';
 import Colors from '../constants/colors';
 import Input from '../components/common/Input';
 import Number from '../components/common/Number';
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onStartGame }) => {
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
     const [selectedNumber, setSelectedNumber] = useState(0);
@@ -43,7 +44,7 @@ const StartGameScreen = () => {
             <Card style={styles.summaryContainer}>
                 <Text>You Selected</Text>
                 <Number>{selectedNumber}</Number>
-                <Button title='START GAME' />
+                <Button title='START GAME' onPress={() => onStartGame(selectedNumber)} />
             </Card>
         );
     }
@@ -111,5 +112,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 });
+
+StartGameScreen.propTypes = {
+    onStartGame: PropTypes.func.isRequired
+};
 
 export default StartGameScreen;
